@@ -10,14 +10,14 @@ namespace GameLords.ClashOfClams
 {
 	public enum SyslogLevel
 	{
-		EMGCY			= 0,
-		ALERT			= 1,
-		CRITICAL		= 2,
-		ERROR			= 3,
-		WARNING			= 4,
-		NOTICE			= 5,
-		INFO			= 6,
-		DEBUG			= 7
+		EMGCY		= 0,
+		ALERT		= 1,
+		CRITICAL	= 2,
+		ERROR		= 3,
+		WARNING		= 4,
+		NOTICE		= 5,
+		INFO		= 6,
+		DEBUG		= 7
 	}
 
 	public enum SyslogFacility
@@ -52,12 +52,12 @@ namespace GameLords.ClashOfClams
 		private static string				originHost;
 		private static string				applicationId;
 		private static string				remoteHost;
-		private static int					remotePort;
+		private static int  				remotePort;
 		private static SyslogLevel			maxLevel;
 		private static UdpClient			client      = null;
 		private static Object				locker      = new Object();
-		private static bool					initialized = false;
-		private static int					repeatCount = 1;
+		private static bool 				initialized = false;
+		private static int  				repeatCount = 1;
 		private static SyslogLevel			repeatLevel = SyslogLevel.EMGCY;
 
 
