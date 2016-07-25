@@ -9,7 +9,7 @@ A static syslog class.
 
 **First call the Init method**
 
-**SyslogClient.Init**( \<server ID where client is running>, \<application name>, \<target IP Address>, \<target port>, \<minimum accepted priority level - set it to Level.DEBUG for all messages>);
+**SyslogClient.Init**( \<hostname where client is running>, \<application name>, \<hostname of syslog server>, \<syslog serverport>, \<minimum accepted priority level - set it to Level.DEBUG for all messages>);
 
 Example: ```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, Level.INFO);```
 
