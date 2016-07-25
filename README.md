@@ -11,9 +11,7 @@ A static syslog class.
 
 **SyslogClient.Init**( \<server ID where client is running>, \<application name>, \<target IP Address>, \<target port>, \<minimum accepted priority level - set it to Level.DEBUG for all messages>);
 
-Example: 
-
-```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, Level.INFO);```
+Example: ```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, Level.INFO);```
 
 If you try to send a message (see: SyslogClient.Send() below without calling Init first, an exception will be thrown.
 
@@ -23,9 +21,7 @@ Set up a repeated send for high priority messages (since we are sending in non-g
 
 **SyslogClient.SetRepeat**(\<log level>,\<number of repeats>)
 
-Example: 
-
-    SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3);
+Example: ```SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3);```
 
 **SEND MESSAGES!**
 
