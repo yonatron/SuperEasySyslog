@@ -49,13 +49,13 @@ namespace GameLords.ClashOfClams
 
 	public static class SyslogClient
 	{
-		private static string				originHost;
-		private static string				applicationId;
-		private static string				remoteHost;
-		private static int					remotePort;
+		private static string		originHost;
+		private static string		applicationId;
+		private static string		remoteHost;
+		private static int			remotePort;
 		private static SyslogLevel	maxLevel;
-		private static UdpClient		client      = null;
-		private static Object				locker      = new Object();
+		private static UdpClient	client      = null;
+		private static Object		locker      = new Object();
 		private static bool         initialized = false;
 		private static int          repeatCount = 1;
 		private static SyslogLevel  repeatLevel = SyslogLevel.EMGCY;
