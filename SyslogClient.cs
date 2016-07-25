@@ -127,15 +127,12 @@ namespace GameLords.ClashOfClams
 	}
 }	
 
-// Usage example:
-// 
+// SAMPLE CODE: (SEE README FOR MORE INFO)
 // -- Setup:
-// SyslogClient.Init("MyServer", "MyApplication", <target IP Address>,<target port>, Level.INFO);
+// SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, Level.INFO)
+// SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3)  // Note this call is optional
 //
-// -- Optional: Set up a repeated send for high priority messages: (because syslog uses UDP, a non-guaranteed prototocol.)
-// SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3)
-//
-// -- Writing to the log, examples:
+// -- Write to the log:
 // SyslogClient.Send(SyslogLevel.INFO, "Application started");
 // SyslogClient.Send("DEBUG", "Request received: " + requestDetails);
 // SyslogClient.Send(SyslogLevel.WARNING, "Low memory");
