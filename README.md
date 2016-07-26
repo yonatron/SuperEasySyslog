@@ -13,7 +13,7 @@ A syslog client for .Net
 
 Example: ```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, SyslogLevel.INFO);```
 
-If you try to send a message (see: SyslogClient.Send() below without calling Init first, an exception will be thrown.
+If you try to send a message without calling Init first, an exception will be thrown.
 
 **OPTIONALLY:** 
 
