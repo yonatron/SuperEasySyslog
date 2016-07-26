@@ -1,0 +1,4 @@
+C:\supereasysyslog\bin\Release\SuperEasySyslog.dll
+C:\supereasysyslog\bin\Release\SuperEasySyslog.pdb
+C:\supereasysyslog\obj\Release\SuperEasySyslog.dll
+C:\supereasysyslog\obj\Release\SuperEasySyslog.pdb
