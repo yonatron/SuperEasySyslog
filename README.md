@@ -1,5 +1,5 @@
 # **SyslogClient**
-A static syslog class. 
+A syslog client for .Net
 
 1. Add the code to your project either as source code (SyslogClient.cs) or as a reference to supereasysyslog.dll
 2. Initialize
