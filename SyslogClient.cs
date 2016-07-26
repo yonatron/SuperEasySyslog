@@ -89,7 +89,19 @@ namespace SuperEasySyslog
 			{
 				int priority  = ((int)SyslogFacility.Syslog) * 8 + ((int)level);
 				string m      = String.Format("<{0}> {1} {2} {3} {4} {5}", priority, DateTime.Now.ToString("MMM dd HH:mm:ss"), originHost, applicationId, level.ToString(), message);
-				SendIt(m, level <= repeatLevel ? repeatCount : 1);
+				try
+				{
+					byte[] bytes = Encoding.ASCII.GetBytes(m);
+					lock (locker)
+					{
+						for (int count = 0; count < (level <= repeatLevel ? repeatCount : 1); count++)
+							client.Send(bytes, bytes.Length);
+					}
+				}
+				catch (Exception e)
+				{
+					throw new Exception("Error sending to Syslog: " + remoteHost + ":" + remotePort + Environment.NewLine + e.Message, e.InnerException);
+				}
 			}
 		}
 
@@ -106,23 +118,6 @@ namespace SuperEasySyslog
 				; // Coder error accident forgiveness. Just send with default log level.
 			}
 			Send(aLevel, message);
-		}
-
-		private static void SendIt(string message, int repeat)
-		{
-			try
-			{
-				byte[] bytes = Encoding.ASCII.GetBytes(message);
-				lock (locker)
-				{
-					for(int count = 0; count < repeat; count++)
-						client.Send(bytes, bytes.Length);
-				}
-			}
-			catch (Exception e)
-			{
-				throw new Exception("Error sending to Syslog: " + remoteHost + ":" + remotePort + Environment.NewLine + e.Message, e.InnerException);
-			}
 		}
 	}
 }	
