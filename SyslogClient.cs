@@ -6,7 +6,7 @@ using System.Text;
 /// Author: JD Gershan
 ///
 
-namespace GameLords.ClashOfClams
+namespace SuperEasySyslog
 {
 	public enum SyslogLevel
 	{
@@ -68,7 +68,7 @@ namespace GameLords.ClashOfClams
 			remoteHost    = remote;
 			remotePort    = port;
 			client        = new UdpClient(remote, port);
-			maxLevel      = max; // Max permitted log level anything higher than this (higher = lower priority) will be ignored
+			maxLevel      = max; // Max permitted log level anything higher than this (higher level = lower priority) will be ignored
 			initialized   = true;
 		}
 

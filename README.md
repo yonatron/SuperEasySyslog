@@ -9,7 +9,7 @@ A static syslog class.
 
 **First call the Init method**
 
-**SyslogClient.Init**( \<hostname where client is running>, \<application name>, \<hostname of syslog server>, \<syslog serverport>, \<minimum accepted priority level - set it to Level.DEBUG for all messages>);
+**SyslogClient.Init**( \<hostname where client is running>, \<application name>, \<hostname of syslog server>, \<syslog server port>, \<minimum accepted priority level - set it to Level.DEBUG for all messages>);
 
 Example: ```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, Level.INFO);```
 
@@ -23,7 +23,7 @@ Set up a repeated send for high priority messages (since we are sending in non-g
 
 Example: ```SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3);```
 
-**SEND MESSAGES!**
+**NOW SEND MESSAGES!**
 
 SyslogClient.Send( \<priority level> , \<message>);
 
