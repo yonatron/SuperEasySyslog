@@ -1,7 +1,7 @@
 # **SyslogClient**
 A static syslog class. 
 
-1. Add the code to your project either as source code (syslogClient.cs) or as a reference to supereasysyslog.dll
+1. Add the code to your project either as source code (SyslogClient.cs) or as a reference to supereasysyslog.dll
 2. Initialize
 3. Start logging.
 
