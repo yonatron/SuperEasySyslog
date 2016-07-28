@@ -6,7 +6,7 @@ using System.Text;
 /// Author: JD Gershan
 ///
 
-namespace SuperEasySyslog
+namespace instapi2
 {
 	public enum SyslogLevel
 	{
