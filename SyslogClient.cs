@@ -126,11 +126,11 @@ namespace SuperEasySyslog
 
 // SAMPLE CODE: (SEE README FOR MORE INFO)
 // -- Setup:
-// SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, Level.INFO)
-// SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3)  // Note this call is optional
+// SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, SyslogSeeverity.INFO, SyslogFacilty.User)
+// SyslogClient.SetRepeat(SyslogSeverity.CRITICAL,3)  // Note this call is optional
 //
 // -- Write to the log:
-// SyslogClient.Send(SyslogLevel.INFO, "Application started");
+// SyslogClient.Send(SyslogSeverity.INFO, "Application started");
 // SyslogClient.Send("DEBUG", "Request received: " + requestDetails);
-// SyslogClient.Send(SyslogLevel.WARNING, "Low memory");
+// SyslogClient.Send(SyslogSeverity.WARNING, "Low memory");
 //
