@@ -126,7 +126,7 @@ namespace SuperEasySyslog
 
 // SAMPLE CODE: (SEE README FOR MORE INFO)
 // -- Setup:
-// SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, SyslogSeeverity.INFO, SyslogFacilty.User)
+// SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, SyslogSeverity.INFO, SyslogFacilty.User)
 // SyslogClient.SetRepeat(SyslogSeverity.CRITICAL,3)  // Note this call is optional
 //
 // -- Write to the log:
