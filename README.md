@@ -9,30 +9,30 @@ A syslog client for .Net
 
 **First call the Init method**
 
-**SyslogClient.Init**( \<hostname where client is running>, \<application name>, \<hostname of syslog server>, \<syslog server port>, \<minimum accepted priority level - set it to SyslogLevel.DEBUG for all messages>);
+**SyslogClient.Init**( \<hostname where client is running>, \<application name>, \<hostname of syslog server>, [\<syslog server port>], [\<minimum accepted severity level - set it to SyslogLevel.DEBUG for all messages>], [\<facility>]);
 
-Example: ```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, SyslogLevel.INFO);```
+Example: ```SyslogClient.Init("MolluscHeim", "Clash of Clams", "logs.mycloud.com", 514, SyslogSeverity.INFO, SyslogFacility.User);```
 
 If you try to send a message without calling Init first, an exception will be thrown.
 
 **OPTIONALLY:** 
 
-Set up a repeated send for high priority messages (since we are sending in non-guaranteed udp)
+Set up a repeated send for high severity messages (since we are sending in non-guaranteed udp)
 
-**SyslogClient.SetRepeat**(\<log level>,\<number of repeats>)
+**SyslogClient.SetRepeat**(\<minimum severity level to repeat>,\<number of repeats>)
 
-Example: ```SyslogClient.SetRepeat(SyslogLevel.CRITICAL,3);```
+Example: ```SyslogClient.SetRepeat(SyslogSeverity.CRITICAL,3);```
 
 **NOW SEND MESSAGES!**
 
-SyslogClient.Send( \<priority level> , \<message>);
+SyslogClient.Send( \<severity level> , \<message>);
 
 **Examples:**
 
-```SyslogClient.Send( SyslogLevel.INFO, "Application started");```
+```SyslogClient.Send( SyslogSeverity.INFO, "Application started");```
 
-```SyslogClient.Send( SyslogLevel.WARNING, "Low memory!");```
+```SyslogClient.Send( SyslogSeverity.WARNING, "Low memory!");```
 
-[NOTE: You can also use a string to set the message's log level if you prefer like this:]
+[NOTE: You can also use a string to set the message's severity level if you prefer like this:]
 
 ```SyslogClient.Send( "DEBUG", "Request received: " + requestDetails);```

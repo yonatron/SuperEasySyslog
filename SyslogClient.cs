@@ -6,9 +6,9 @@ using System.Text;
 /// Author: JD Gershan
 ///
 
-namespace instapi2
+namespace SuperEasySyslog
 {
-	public enum SyslogLevel
+	public enum SyslogSeverity
 	{
 		EMGCY		= 0,
 		ALERT		= 1,
@@ -53,48 +53,50 @@ namespace instapi2
 		private static string				applicationId;
 		private static string				remoteHost;
 		private static int  				remotePort;
-		private static SyslogLevel			maxLevel;
+		private static SyslogSeverity			minSeverity;
 		private static UdpClient			client      = null;
 		private static Object				locker      = new Object();
 		private static bool 				initialized = false;
 		private static int  				repeatCount = 1;
-		private static SyslogLevel			repeatLevel = SyslogLevel.EMGCY;
+		private static SyslogSeverity			repeatSeverity = SyslogSeverity.EMGCY;
+		private static SyslogFacility			defaultFaciltity;
 
 
-		public static void Init(string origin, string application, string remote, int port, SyslogLevel max = SyslogLevel.DEBUG)
+		public static void Init(string origin, string application, string remote, int port, SyslogSeverity severity = SyslogSeverity.DEBUG, SyslogFacility facility = SyslogFacility.User)
 		{
 			originHost    = origin;
 			applicationId = application;
 			remoteHost    = remote;
 			remotePort    = port;
 			client        = new UdpClient(remote, port);
-			maxLevel      = max; // Max permitted log level anything higher than this (higher level = lower priority) will be ignored
+			minSeverity      = severity; // Minimum severity for logging anything lower than this will be ignored
+			defaultFaciltity = facility;
 			initialized   = true;
 		}
 
 		// Call to set repeats for important messages
-		public static void SetRepeat(SyslogLevel level, int count = 3)
+		public static void SetRepeat(SyslogSeverity severity, int count = 3)
 		{
-			repeatLevel = level;
+			repeatSeverity = severity;
 			repeatCount = count;
 		}
 
 		
 		// Call with log level from enum
-		public static void Send(SyslogLevel level, string message)
+		public static void Send(SyslogSeverity severity, string message)
 		{
 			if (!initialized)
-				throw new Exception("SyslogClient not initialized. Call Init method before sending: SyslogClient.Init(string origin, string application, string remote, int port, SyslogLevel max)");
-			if (level <= maxLevel)
+				throw new Exception("SyslogClient not initialized. Call Init method before sending: SyslogClient.Init(string origin, string application, string remote, int port, SyslogSeverity severity)");
+			if (severity <= minSeverity)
 			{
-				int priority  = ((int)SyslogFacility.Syslog) * 8 + ((int)level);
-				string m      = String.Format("<{0}> {1} {2} {3} {4} {5}", priority, DateTime.Now.ToString("MMM dd HH:mm:ss"), originHost, applicationId, level.ToString(), message);
+				int priority  = ((int)SyslogFacility.Syslog) * 8 + ((int)severity);
+				string m      = String.Format("<{0}> {1} {2} {3} {4} {5}", priority, DateTime.Now.ToString("MMM dd HH:mm:ss"), originHost, applicationId, severity.ToString(), message);
 				try
 				{
 					byte[] bytes = Encoding.ASCII.GetBytes(m);
 					lock (locker)
 					{
-						for (int count = 0; count < (level <= repeatLevel ? repeatCount : 1); count++)
+						for (int count = 0; count < (severity <= repeatSeverity ? repeatCount : 1); count++)
 							client.Send(bytes, bytes.Length);
 					}
 				}
@@ -108,16 +110,16 @@ namespace instapi2
 		// Call with log level from string, we will convert to enum value.
 		public static void Send(string level, string message)
 		{
-			SyslogLevel aLevel = SyslogLevel.INFO;
+			SyslogSeverity severity = SyslogSeverity.INFO;
 			try
 			{
-				aLevel = (SyslogLevel)Enum.Parse(typeof(SyslogLevel), level, true);
+				severity = (SyslogSeverity)Enum.Parse(typeof(SyslogSeverity), level, true);
 			}
 			catch
 			{
 				; // Coder error accident forgiveness. Just send with default log level.
 			}
-			Send(aLevel, message);
+			Send(severity, message);
 		}
 	}
 }	
