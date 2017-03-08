@@ -74,6 +74,11 @@ namespace SuperEasySyslog
 			initialized   = true;
 		}
 
+		public static bool Initialized()
+		{
+			return initialized;
+		}
+
 		// Call to set repeats for important messages
 		public static void SetRepeat(SyslogSeverity severity, int count = 3)
 		{
